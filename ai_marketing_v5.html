@@ -188,6 +188,7 @@ body{background:#1a1a2e;display:flex;justify-content:center;align-items:flex-sta
 .btn-ai:active{opacity:.8}
 .spin{animation:pspin 3s ease-in-out infinite}
 @keyframes pspin{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.2) rotate(15deg)}}
+@keyframes regen-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 .btn-edit{flex:1;padding:13px;border-radius:15px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;font-family:inherit;background:#FAF8F5;color:#8080A0;border:0.5px solid #EEECF8;transition:all .15s}
 .btn-edit:active{background:#F0EFFB}
 .btn-save{width:100%;padding:11px;border-radius:15px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;font-family:inherit;background:transparent;color:#B0A8D0;border:none;transition:color .15s}
@@ -244,7 +245,12 @@ body{background:#1a1a2e;display:flex;justify-content:center;align-items:flex-sta
 .msg-card{background:#fff;border-radius:18px;border:0.5px solid #EDE9FE;overflow:hidden}
 .msg-hd{padding:13px 16px 11px;border-bottom:0.5px solid #F5F3FF;display:flex;justify-content:space-between;align-items:center}
 .msg-hd-lbl{font-size:11px;font-weight:600;color:#B0A8D0;letter-spacing:.08em}
+.msg-hd-right{display:flex;align-items:center;gap:7px}
 .msg-hd-badge{font-size:11px;font-weight:500;color:#7C5CBF;background:#F0EFFB;padding:3px 9px;border-radius:10px}
+.btn-regen{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:#7C5CBF;background:#F0EFFB;border:none;border-radius:10px;padding:4px 9px;cursor:pointer;font-family:inherit;transition:opacity .15s}
+.btn-regen:active{opacity:.6}
+.btn-regen svg{transition:transform .4s}
+.btn-regen.spinning svg{animation:regen-spin .5s linear}
 .msg-body{padding:14px 16px}
 .mctabs{display:flex;gap:6px;margin-bottom:12px}
 .mctab{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;border:0.5px solid #EDE9FE;color:#9090B0;background:#FAF8F5;-webkit-tap-highlight-color:transparent}
@@ -290,6 +296,23 @@ body{background:#1a1a2e;display:flex;justify-content:center;align-items:flex-sta
 .apv-lbl{font-size:13px;color:#8080A0}
 .apv-val{font-size:13px;font-weight:600;color:#1A1A2E}
 .apv-val.green{color:#22C55E}
+.aic{background:linear-gradient(145deg,#0D3D2C,#1A5C3E);border-radius:16px;padding:13px 14px 12px;position:relative;overflow:hidden}
+.aic::after{content:'';position:absolute;top:-22px;right:-22px;width:80px;height:80px;border-radius:50%;background:rgba(34,197,94,.13);pointer-events:none}
+.aic-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;position:relative;z-index:1}
+.aic-lbl{font-size:9px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em;margin-bottom:4px;display:flex;align-items:center;gap:4px}
+.aic-amt{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.4px;line-height:1}
+.aic-conf{background:rgba(34,197,94,.18);border-radius:10px;padding:6px 10px;text-align:center;flex-shrink:0}
+.aic-cv{font-size:15px;font-weight:800;color:#4ADE80;line-height:1}
+.aic-cl{font-size:9px;color:rgba(255,255,255,.38);margin-top:2px}
+.aic-metrics{display:flex;margin-bottom:10px;position:relative;z-index:1}
+.aic-metric{flex:1;text-align:center}
+.aic-metric+.aic-metric{border-left:1px solid rgba(255,255,255,.1)}
+.aic-mv{font-size:13px;font-weight:700;color:#fff;line-height:1;margin-bottom:2px}
+.aic-ml{font-size:10px;color:rgba(255,255,255,.38)}
+.aic-sep{height:1px;background:rgba(255,255,255,.1);margin-bottom:9px}
+.aic-why{display:flex;flex-direction:column;gap:5px;position:relative;z-index:1}
+.aic-bullet{font-size:11px;color:rgba(255,255,255,.5);display:flex;align-items:flex-start;gap:5px;line-height:1.4}
+.aic-bico{color:#4ADE80;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
 .toast{position:absolute;bottom:96px;left:50%;transform:translateX(-50%);background:#1A1A2E;color:#fff;font-size:12px;font-weight:500;padding:9px 20px;border-radius:20px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s;z-index:99;display:flex;align-items:center;gap:6px}
 .toast.show{opacity:1}
 
@@ -450,11 +473,23 @@ svg{display:block}
           <div class="camp-name">Mother's Day Special 🌸</div>
           <div class="camp-desc">A warm campaign to celebrate your clients and bring them back to the salon.</div>
         </div>
-        <div class="why-card">
-          <div class="why-top"><div class="why-sparkle"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L8.6 5.4L13 7L8.6 8.6L7 13L5.4 8.6L1 7L5.4 5.4Z" fill="#A78BFA"/></svg></div><span class="why-label">WHY AI CHOSE THIS FOR YOU</span></div>
-          <div class="why-items">
-            <div class="why-item"><div class="why-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#A78BFA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="why-text"><strong>23% return rate</strong> for warm personal messages — based on your salon's data</div></div>
-            <div class="why-item"><div class="why-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#A78BFA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="why-text"><strong>Mother's Day</strong> is a peak booking moment — clients look for self-care gifts</div></div>
+        <div class="aic">
+          <div class="aic-top">
+            <div>
+              <div class="aic-lbl"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 0.5L6.2 3.8L9.5 5L6.2 6.2L5 9.5L3.8 6.2L0.5 5L3.8 3.8Z" fill="#4ADE80"/></svg>AI ESTIMATED INCOME</div>
+              <div class="aic-amt">$4,200 – $6,800</div>
+            </div>
+            
+          </div>
+          <div class="aic-metrics">
+            <div class="aic-metric"><div class="aic-mv">~97</div><div class="aic-ml">clients</div></div>
+            <div class="aic-metric"><div class="aic-mv">23%</div><div class="aic-ml">conv. rate</div></div>
+            <div class="aic-metric"><div class="aic-mv">$55</div><div class="aic-ml">avg/booking</div></div>
+          </div>
+          <div class="aic-sep"></div>
+          <div class="aic-why">
+            <div class="aic-bullet"><span class="aic-bico">↑</span>23% return rate with warm personal messages — your salon's data</div>
+            <div class="aic-bullet"><span class="aic-bico">↑</span>Mother's Day peak — clients actively seek self-care gifts</div>
           </div>
         </div>
         <div class="det-card">
@@ -467,7 +502,7 @@ svg{display:block}
           <div class="irow"><div class="irow-ico" style="background:#059669"></div><span class="irow-lbl">Timing</span><div class="irow-right"><div class="irow-val">Tue &amp; Thu · 10:00 AM</div><div class="irow-sub">Optimal open rate window</div></div></div>
         </div>
         <div class="msg-card">
-          <div class="msg-hd"><span class="msg-hd-lbl">MESSAGE PREVIEW</span><span class="msg-hd-badge">AI-generated</span></div>
+          <div class="msg-hd"><span class="msg-hd-lbl">MESSAGE PREVIEW</span><div class="msg-hd-right"><button class="btn-regen" id="btn-regen" onclick="regenMsg()"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5A4 4 0 1 1 7 1.8" stroke="#7C5CBF" stroke-width="1.5" stroke-linecap="round"/><path d="M7 0v2.5H9.5" stroke="#7C5CBF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Regenerate</button></div></div>
           <div class="msg-body">
             <div class="mctabs">
               <div class="mctab on" onclick="switchTab(this,'sms')">SMS</div>
@@ -796,6 +831,34 @@ function saveDraft() {
   setTimeout(() => toast.classList.remove('show'), 2200);
 
   setTimeout(() => goTo('s1'), 400);
+}
+
+const SMS_VARIANTS = [
+  {txt:`Hi <span class="msg-hl">[Name]</span>, Mother's Day is almost here 🌸 Treat yourself or gift someone special a relaxing nail session. We'd love to celebrate with you this weekend!`, cta:'Book a visit →'},
+  {txt:`Hey <span class="msg-hl">[Name]</span>! 💅 Mother's Day is the perfect excuse to show yourself some love. Come in for a fresh set and leave feeling amazing. Limited slots this week!`, cta:'Book your spot →'},
+  {txt:`<span class="msg-hl">[Name]</span>, you deserve to be pampered 🌷 This Mother's Day, let us take care of you. Book a visit and enjoy the calm before the celebration.`, cta:'Reserve now →'},
+];
+const EMAIL_VARIANTS = [
+  {subj:`We're thinking of you, <span class="msg-hl">[Name]</span> 🌸`, body:`Mother's Day is almost here — and we'd love to help you celebrate. Whether it's a treat for yourself or a gift for someone special, we're here to make it a beautiful moment. Book anytime this weekend!`},
+  {subj:`A little pampering goes a long way, <span class="msg-hl">[Name]</span> 💅`, body:`Mother's Day is the perfect time to pause, breathe, and treat yourself. Our team is ready to give you a fresh look you'll love. Slots are filling up — grab yours before they're gone.`},
+  {subj:`You deserve this, <span class="msg-hl">[Name]</span> 🌷`, body:`This Mother's Day, gift yourself something beautiful. A fresh set, a relaxing session, and a moment just for you. We'd love to see you — book your appointment today.`},
+];
+let _regenIdx = 0;
+function regenMsg() {
+  _regenIdx = (_regenIdx + 1) % SMS_VARIANTS.length;
+  const btn = document.getElementById('btn-regen');
+  btn.classList.add('spinning');
+  setTimeout(() => btn.classList.remove('spinning'), 500);
+
+  const sms = SMS_VARIANTS[_regenIdx];
+  const email = EMAIL_VARIANTS[_regenIdx];
+
+  document.querySelector('#sms-msg .msg-txt').innerHTML = sms.txt;
+  document.querySelector('#sms-msg .msg-cta-pill').innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>${sms.cta}`;
+
+  const emailBubble = document.querySelector('#email-msg .msg-bubble');
+  emailBubble.innerHTML = `<div class="msg-tag">SUBJECT LINE</div><div class="msg-txt" style="margin-bottom:10px">${email.subj}</div><div class="msg-tag">BODY</div><div class="msg-txt">${email.body}</div>`;
+  document.querySelector('#email-msg .msg-cta-pill').innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>Book a visit →`;
 }
 </script>
 
