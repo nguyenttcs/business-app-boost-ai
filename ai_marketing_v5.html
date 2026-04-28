@@ -367,7 +367,7 @@ svg{display:block}
   <!-- S1: HOME -->
   <div class="screen active" id="s1">
     <div class="sb"><span class="sbt">9:41</span><div class="sbi"><svg width="15" height="11" viewBox="0 0 15 11" fill="#1A1A2E"><rect x="0" y="4.5" width="2" height="6.5" rx="1"/><rect x="4" y="2.5" width="2" height="8.5" rx="1"/><rect x="8" y=".5" width="2" height="10.5" rx="1"/><rect x="12" y="0" width="2" height="11" rx="1"/></svg><svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x=".5" y=".5" width="20" height="11" rx="2" stroke="#1A1A2E" stroke-opacity=".3"/><rect x="2" y="2" width="14" height="8" rx="1.3" fill="#1A1A2E" opacity=".8"/></svg></div></div>
-    <div class="stepbar"><div class="steps"><div class="step"><div class="sc active">1</div><span class="sl active">Start</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">2</div><span class="sl idle">Select</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">3</div><span class="sl idle">Create</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">4</div><span class="sl idle">Review</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">5</div><span class="sl idle">Approve</span></div></div></div>
+    <div class="stepbar"><div class="steps"><div class="step"><div class="sc active">1</div><span class="sl active">Start</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">2</div><span class="sl idle">Campaign</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">3</div><span class="sl idle">Approve</span></div></div></div>
     <div class="s1-scroll">
       <div class="qs-section" style="padding-top:16px">
         <div class="qs-lbl">QUICK STARTS</div>
@@ -398,7 +398,7 @@ svg{display:block}
           </div>
         </div>
         <div class="recent-lbl">RECENT</div>
-        <div class="rc-card" onclick="goTo('s4')">
+        <div class="rc-card" onclick="goTo('s3')">
           <div class="rc-top">
             <div class="rc-name-row">
               <div class="rc-dot" style="background:#22C55E"></div>
@@ -413,7 +413,7 @@ svg{display:block}
             <div class="rc-metric"><div class="rc-mlbl">Conv. Rate</div><div class="rc-mval">23%</div></div>
           </div>
         </div>
-        <div class="rc-card" onclick="goTo('s4')">
+        <div class="rc-card" onclick="goTo('s3')">
           <div class="rc-top">
             <div class="rc-name-row">
               <div class="rc-dot" style="background:#7C5CBF"></div>
@@ -430,89 +430,42 @@ svg{display:block}
         </div>
         <div class="draft-lbl">DRAFTS</div>
         <div class="recent-card" id="draft-list">
-          <div class="rrow" onclick="goTo('s4')"><div class="rdot" style="background:#F59E0B"></div><div style="flex:1"><div class="rnm">Summer Flash Sale</div><div class="rsub">SMS · All clients · Draft</div></div><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4.5 2.5l4 4-4 4" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-          <div class="rrow" onclick="goTo('s4')"><div class="rdot" style="background:#F59E0B"></div><div style="flex:1"><div class="rnm">Loyalty Reward Announcement</div><div class="rsub">Email · VIP clients · Draft</div></div><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4.5 2.5l4 4-4 4" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div class="rrow" onclick="goTo('s3')"><div class="rdot" style="background:#F59E0B"></div><div style="flex:1"><div class="rnm">Summer Flash Sale</div><div class="rsub">SMS · All clients · Draft</div></div><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4.5 2.5l4 4-4 4" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div class="rrow" onclick="goTo('s3')"><div class="rdot" style="background:#F59E0B"></div><div style="flex:1"><div class="rnm">Loyalty Reward Announcement</div><div class="rsub">Email · VIP clients · Draft</div></div><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4.5 2.5l4 4-4 4" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         </div>
       </div>
     </div>
     <div class="fi"><div class="fi-box" onclick="startFlow('Create a Mother\'s Day campaign for me.')"><span class="fi-ph">Describe your goal, audience, timing...</span><div class="fi-mic"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="4.5" y="1" width="6" height="9" rx="3" stroke="white" stroke-width="1.4"/><path d="M2 7.5C2 10.5 4.5 13 7.5 13s5.5-2.5 5.5-5.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/><path d="M7.5 13v1.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></div><div class="fi-send"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 7.5L2 2.5l2.5 5-2.5 5L13 7.5z" fill="white"/></svg></div></div></div>
   </div>
 
-  <!-- S2: SELECT STORES -->
-  <div class="screen" id="s2">
-    <div class="sb"><span class="sbt">9:41</span><div class="sbi"><svg width="15" height="11" viewBox="0 0 15 11" fill="#1A1A2E"><rect x="0" y="4.5" width="2" height="6.5" rx="1"/><rect x="4" y="2.5" width="2" height="8.5" rx="1"/><rect x="8" y=".5" width="2" height="10.5" rx="1"/><rect x="12" y="0" width="2" height="11" rx="1"/></svg><svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x=".5" y=".5" width="20" height="11" rx="2" stroke="#1A1A2E" stroke-opacity=".3"/><rect x="2" y="2" width="14" height="8" rx="1.3" fill="#1A1A2E" opacity=".8"/></svg></div></div>
-    <div class="stepbar"><div class="steps"><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Start</span></div><div class="sline done"></div><div class="step"><div class="sc active">2</div><span class="sl active">Select</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">3</div><span class="sl idle">Create</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">4</div><span class="sl idle">Review</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">5</div><span class="sl idle">Approve</span></div></div></div>
-    <div class="cnav"><div class="cbk" onclick="goTo('s1')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2L4 6.5L9 11" stroke="#7C5CBF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="cav"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5L11 7.5L17 9L11 10.5L9 16.5L7 10.5L1 9L7 7.5Z" fill="white"/></svg></div><div><div class="cnm">AI Assistant</div><div class="cst"><span class="odot"></span>Online</div></div></div>
-    <div class="cs">
-      <div class="br u"><div class="b usr" id="umsg">Create a Mother's Day campaign for me.</div></div>
-      <div class="br"><div class="bav"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L8 5.5L13 6.5L8 7.5L6.5 12L5 7.5L0 6.5L5 5.5Z" fill="white"/></svg></div><div><div class="b ai" style="margin-bottom:11px">I'd love to help create that campaign! 🌸<br><br>Which store should I create this for?</div><div class="sl-wrap">
-              <div class="sl-search">
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="5.5" cy="5.5" r="4" stroke="#C4B5FD" stroke-width="1.3"/><path d="M9 9l2 2" stroke="#C4B5FD" stroke-width="1.3" stroke-linecap="round"/></svg>
-                <input class="sl-inp" id="sl-inp" placeholder="Search stores..." oninput="filterStores(this.value)"/>
-                <span class="sl-badge" id="sl-badge">7</span>
-              </div>
-              <div class="sl-actions">
-                <span class="sl-sel-txt" id="sl-sel-txt">All 7 selected</span>
-                <button class="sl-tog" id="sl-tog" onclick="toggleAllStores()">Deselect All</button>
-              </div>
-              <div class="sl-list" id="sl-list"></div>
-              <button class="sl-btn" id="sl-btn" onclick="goTo('s3')">Continue · 7 stores</button>
-            </div></div></div>
-    </div>
-    <div class="fi"><div class="fi-box"><span class="fi-ph">Ask anything...</span><div class="fi-mic"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="4.5" y="1" width="6" height="9" rx="3" stroke="white" stroke-width="1.4"/><path d="M2 7.5C2 10.5 4.5 13 7.5 13s5.5-2.5 5.5-5.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/><path d="M7.5 13v1.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></div><div class="fi-send"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 7.5L2 2.5l2.5 5-2.5 5L13 7.5z" fill="white"/></svg></div></div></div>
-  </div>
-
-  <!-- S3: CREATE (Q&A) -->
+  <!-- S3: CAMPAIGN (Draft + Review combined) -->
   <div class="screen" id="s3">
     <div class="sb"><span class="sbt">9:41</span><div class="sbi"><svg width="15" height="11" viewBox="0 0 15 11" fill="#1A1A2E"><rect x="0" y="4.5" width="2" height="6.5" rx="1"/><rect x="4" y="2.5" width="2" height="8.5" rx="1"/><rect x="8" y=".5" width="2" height="10.5" rx="1"/><rect x="12" y="0" width="2" height="11" rx="1"/></svg><svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x=".5" y=".5" width="20" height="11" rx="2" stroke="#1A1A2E" stroke-opacity=".3"/><rect x="2" y="2" width="14" height="8" rx="1.3" fill="#1A1A2E" opacity=".8"/></svg></div></div>
-    <div class="stepbar"><div class="steps"><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Start</span></div><div class="sline done"></div><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Select</span></div><div class="sline done"></div><div class="step"><div class="sc active">3</div><span class="sl active">Create</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">4</div><span class="sl idle">Review</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">5</div><span class="sl idle">Approve</span></div></div></div>
-    <div class="cnav"><div class="cbk" onclick="goTo('s2')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2L4 6.5L9 11" stroke="#7C5CBF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="cav"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5L11 7.5L17 9L11 10.5L9 16.5L7 10.5L1 9L7 7.5Z" fill="white"/></svg></div><div><div class="cnm">AI Assistant</div><div class="cst"><span class="odot"></span>Online</div></div></div>
-    <div class="cs" id="s3chat">
-      <div class="br"><div class="bav"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L8 5.5L13 6.5L8 7.5L6.5 12L5 7.5L0 6.5L5 5.5Z" fill="white"/></svg></div><div class="b ai">A few quick questions to build the perfect campaign — tap your answers or type below 👇</div></div>
-      <div class="br"><div class="bav"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L8 5.5L13 6.5L8 7.5L6.5 12L5 7.5L0 6.5L5 5.5Z" fill="white"/></svg></div><div class="b ai">👥 Who should we target?<span class="b-hint">Pick one</span></div></div>
-    </div>
-    <div class="ci-wrap">
-      <div class="chips-zone"><div class="chips-top"><span class="chips-hint-txt" id="chint"></span><span class="chips-clear" id="cclr" onclick="clearChips()">Clear all</span></div><div class="chips-row" id="crow"><div class="chip" onclick="toggleChip(this,'Return Clients')"><svg class="chk-ico" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Return Clients</div><div class="chip" onclick="toggleChip(this,'New Clients')"><svg class="chk-ico" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>New Clients</div><div class="chip" onclick="toggleChip(this,'All Clients')"><svg class="chk-ico" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>All Clients</div></div></div>
-      <div class="confirm-strip" id="cstrip"><div class="confirm-inner"><button class="btn-conf" onclick="confirmChips()"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3 3 5.5-5.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirm</button></div></div>
-      <div class="inp-row"><input class="ci" id="s3inp" placeholder="Or type your answer..." onkeydown="if(event.key==='Enter')sendTyped()"/><button class="mic-b"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="4.5" y="1" width="6" height="9" rx="3" stroke="white" stroke-width="1.4"/><path d="M2 7.5C2 10.5 4.5 13 7.5 13s5.5-2.5 5.5-5.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/><path d="M7.5 13v1.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></button><button class="snd-b" onclick="sendTyped()"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 7.5L2 2.5l2.5 5-2.5 5L13 7.5z" fill="white"/></svg></button></div>
-    </div>
-  </div>
-
-  <!-- S4: REVIEW -->
-  <div class="screen" id="s4">
-    <div class="sb"><span class="sbt">9:41</span><div class="sbi"><svg width="15" height="11" viewBox="0 0 15 11" fill="#1A1A2E"><rect x="0" y="4.5" width="2" height="6.5" rx="1"/><rect x="4" y="2.5" width="2" height="8.5" rx="1"/><rect x="8" y=".5" width="2" height="10.5" rx="1"/><rect x="12" y="0" width="2" height="11" rx="1"/></svg><svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x=".5" y=".5" width="20" height="11" rx="2" stroke="#1A1A2E" stroke-opacity=".3"/><rect x="2" y="2" width="14" height="8" rx="1.3" fill="#1A1A2E" opacity=".8"/></svg></div></div>
-    <div class="stepbar"><div class="steps"><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Start</span></div><div class="sline done"></div><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Select</span></div><div class="sline done"></div><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Create</span></div><div class="sline done"></div><div class="step"><div class="sc active">4</div><span class="sl active">Review</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">5</div><span class="sl idle">Approve</span></div></div></div>
-    <div class="topnav"><div class="back" onclick="goTo('s3')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2L4 6.5L9 11" stroke="#7C5CBF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="topnav-title">Review Campaign</span></div>
+    <div class="stepbar"><div class="steps"><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Start</span></div><div class="sline done"></div><div class="step"><div class="sc active">2</div><span class="sl active">Campaign</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">3</div><span class="sl idle">Approve</span></div></div></div>
+    <div class="topnav"><div class="back" onclick="goTo('s1')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2L4 6.5L9 11" stroke="#7C5CBF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="topnav-title">Campaign</span></div>
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0">
       <div class="rv-scroll">
-
         <div class="camp-header">
-          <div class="ready-badge"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Ready for review</div>
+          <div class="ready-badge"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>AI Generated</div>
           <div class="camp-name">Mother's Day Special 🌸</div>
           <div class="camp-desc">A warm campaign to celebrate your clients and bring them back to the salon.</div>
         </div>
-
         <div class="why-card">
-          <div class="why-top"><div class="why-sparkle"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L8.6 5.4L13 7L8.6 8.6L7 13L5.4 8.6L1 7L5.4 5.4Z" fill="#A78BFA"/></svg></div><span class="why-label">WHY AI RECOMMENDED THIS</span></div>
+          <div class="why-top"><div class="why-sparkle"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L8.6 5.4L13 7L8.6 8.6L7 13L5.4 8.6L1 7L5.4 5.4Z" fill="#A78BFA"/></svg></div><span class="why-label">WHY AI CHOSE THIS FOR YOU</span></div>
           <div class="why-items">
-            <div class="why-item"><div class="why-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#A78BFA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="why-text"><strong>23% return rate</strong> for warm personal messages — based on your salon's historical data</div></div>
-            <div class="why-item"><div class="why-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#A78BFA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="why-text"><strong>Mother's Day timing</strong> is a peak booking moment — clients actively look for self-care gifts</div></div>
-            <div class="why-item"><div class="why-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#A78BFA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="why-text"><strong>SMS + Email combo</strong> increases reach by 2.4x vs single channel alone</div></div>
+            <div class="why-item"><div class="why-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#A78BFA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="why-text"><strong>23% return rate</strong> for warm personal messages — based on your salon's data</div></div>
+            <div class="why-item"><div class="why-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#A78BFA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="why-text"><strong>Mother's Day</strong> is a peak booking moment — clients look for self-care gifts</div></div>
           </div>
         </div>
-
         <div class="det-card">
           <div class="det-hd"><span class="det-hd-lbl">CAMPAIGN DETAILS</span></div>
-          <div class="obj-row"><div class="obj-lbl">OBJECTIVE</div><div class="obj-val">Re-engage lapsed customers</div><div class="obj-sub">Bring back clients who haven't visited in 30–90 days and encourage rebooking</div></div>
           <div class="irow"><div class="irow-ico" style="background:#7C5CBF"></div><span class="irow-lbl">Audience</span><div class="irow-right"><div class="irow-val" id="rv-target">All Clients</div><div class="irow-sub">~420 clients</div></div></div>
-          <div class="irow"><div class="irow-ico" style="background:#E88F6E"></div><span class="irow-lbl">Stores</span><div class="spills"><span class="spill">Downtown</span><span class="spill">Westside</span><span class="spill">Eastgate</span></div></div>
-          <div class="irow"><div class="irow-ico" style="background:#D97706"></div><span class="irow-lbl">Tone</span><div class="irow-right"><div class="irow-val" id="rv-tone">Warm &amp; Personal</div><div class="irow-sub">Friendly, non-promotional</div></div></div>
           <div class="irow"><div class="irow-ico" style="background:#0369A1"></div><span class="irow-lbl">Channel</span><div class="irow-right"><div class="irow-val" id="rv-channel">SMS</div><div class="irow-sub">Direct to client's phone</div></div></div>
+          <div class="irow"><div class="irow-ico" style="background:#D97706"></div><span class="irow-lbl">Tone</span><div class="irow-right"><div class="irow-val" id="rv-tone">Warm &amp; Personal</div><div class="irow-sub">Friendly, non-promotional</div></div></div>
           <div class="irow"><div class="irow-ico" style="background:#A78BFA"></div><span class="irow-lbl">CTA</span><div class="irow-right"><div class="cta-val">Book a visit →</div><div class="cta-sub">salon.gci.app/book</div></div></div>
-          <div class="irow"><div class="irow-ico" style="background:#9D174D"></div><span class="irow-lbl">Duration</span><div class="irow-right"><div class="irow-val">7 days</div><div class="irow-sub">Starting Apr 28</div></div></div>
-          <div class="irow"><div class="irow-ico" style="background:#D97706"></div><span class="irow-lbl">Timing</span><div class="irow-right"><div class="irow-val">Tue &amp; Thu · 10:00 AM</div><div class="irow-sub">Optimal open rate window</div></div></div>
+          <div class="irow"><div class="irow-ico" style="background:#9D174D"></div><span class="irow-lbl">Duration</span><div class="irow-right"><div class="irow-val">7 days</div><div class="irow-sub">Starting Apr 29</div></div></div>
+          <div class="irow"><div class="irow-ico" style="background:#059669"></div><span class="irow-lbl">Timing</span><div class="irow-right"><div class="irow-val">Tue &amp; Thu · 10:00 AM</div><div class="irow-sub">Optimal open rate window</div></div></div>
         </div>
-
         <div class="msg-card">
           <div class="msg-hd"><span class="msg-hd-lbl">MESSAGE PREVIEW</span><span class="msg-hd-badge">AI-generated</span></div>
           <div class="msg-body">
@@ -530,7 +483,6 @@ svg{display:block}
             </div>
           </div>
         </div>
-
       </div>
       <div class="actions-bar">
         <button class="btn-approve-lg" onclick="goTo('s6')"><div class="shine"></div><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 8l4 4 7-7" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Approve Campaign</button>
@@ -542,7 +494,7 @@ svg{display:block}
   <!-- S5: SUCCESS -->
   <div class="screen" id="s6">
     <div class="sb"><span class="sbt">9:41</span><div class="sbi"><svg width="15" height="11" viewBox="0 0 15 11" fill="#1A1A2E"><rect x="0" y="4.5" width="2" height="6.5" rx="1"/><rect x="4" y="2.5" width="2" height="8.5" rx="1"/><rect x="8" y=".5" width="2" height="10.5" rx="1"/><rect x="12" y="0" width="2" height="11" rx="1"/></svg><svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x=".5" y=".5" width="20" height="11" rx="2" stroke="#1A1A2E" stroke-opacity=".3"/><rect x="2" y="2" width="14" height="8" rx="1.3" fill="#1A1A2E" opacity=".8"/></svg></div></div>
-    <div class="stepbar"><div class="steps"><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Start</span></div><div class="sline done"></div><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Select</span></div><div class="sline done"></div><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Create</span></div><div class="sline done"></div><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Review</span></div><div class="sline done"></div><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Approve</span></div></div></div>
+    <div class="stepbar"><div class="steps"><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Start</span></div><div class="sline done"></div><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Campaign</span></div><div class="sline done"></div><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Approve</span></div></div></div>
     <div class="sw">
       <div class="s-ico-v2"><svg width="38" height="38" viewBox="0 0 38 38" fill="none"><path d="M7 19l8.5 8.5L31 11" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="s-title">Campaign Approved!</div>
@@ -563,7 +515,7 @@ svg{display:block}
   <div class="screen" id="s3b">
     <div class="sb"><span class="sbt">9:41</span><div class="sbi"><svg width="15" height="11" viewBox="0 0 15 11" fill="#1A1A2E"><rect x="0" y="4.5" width="2" height="6.5" rx="1"/><rect x="4" y="2.5" width="2" height="8.5" rx="1"/><rect x="8" y=".5" width="2" height="10.5" rx="1"/><rect x="12" y="0" width="2" height="11" rx="1"/></svg><svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x=".5" y=".5" width="20" height="11" rx="2" stroke="#1A1A2E" stroke-opacity=".3"/><rect x="2" y="2" width="14" height="8" rx="1.3" fill="#1A1A2E" opacity=".8"/></svg></div></div>
     <div class="aie-nav">
-      <button class="aie-back" onclick="goTo('s4')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2L4 6.5L9 11" stroke="#7C5CBF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="aie-back" onclick="goTo('s3')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2L4 6.5L9 11" stroke="#7C5CBF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <div class="aie-ava"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L12.2 8L18 10L12.2 12L10 18L7.8 12L2 10L7.8 8Z" fill="white"/></svg></div>
       <div class="aie-info">
         <div class="aie-name">AI Assistant</div>
@@ -601,7 +553,7 @@ svg{display:block}
       </div>
     </div>
     <div class="aie-bottom">
-      <button class="btn-approve-v2" onclick="goTo('s4')"><div class="shine"></div><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 7.5L2 2.5l2.5 5-2.5 5L13 7.5z" fill="white"/></svg>Save Version</button>
+      <button class="btn-approve-v2" onclick="goTo('s3')"><div class="shine"></div><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 7.5L2 2.5l2.5 5-2.5 5L13 7.5z" fill="white"/></svg>Save Version</button>
       <div class="inp-row" style="padding-bottom:22px">
         <input class="ci" placeholder="Ask to refine further..."/>
         <button class="mic-b"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="4.5" y="1" width="6" height="9" rx="3" stroke="white" stroke-width="1.4"/><path d="M2 7.5C2 10.5 4.5 13 7.5 13s5.5-2.5 5.5-5.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/><path d="M7.5 13v1.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></button>
@@ -613,8 +565,8 @@ svg{display:block}
   <!-- S5M: MANUAL EDIT -->
   <div class="screen" id="s5m">
     <div class="sb"><span class="sbt">9:41</span><div class="sbi"><svg width="15" height="11" viewBox="0 0 15 11" fill="#1A1A2E"><rect x="0" y="4.5" width="2" height="6.5" rx="1"/><rect x="4" y="2.5" width="2" height="8.5" rx="1"/><rect x="8" y=".5" width="2" height="10.5" rx="1"/><rect x="12" y="0" width="2" height="11" rx="1"/></svg><svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x=".5" y=".5" width="20" height="11" rx="2" stroke="#1A1A2E" stroke-opacity=".3"/><rect x="2" y="2" width="14" height="8" rx="1.3" fill="#1A1A2E" opacity=".8"/></svg></div></div>
-    <div class="stepbar"><div class="steps"><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Start</span></div><div class="sline done"></div><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Select</span></div><div class="sline done"></div><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Create</span></div><div class="sline done"></div><div class="step"><div class="sc active">4</div><span class="sl active">Review</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">5</div><span class="sl idle">Approve</span></div></div></div>
-    <div class="topnav"><div class="back" onclick="goTo('s4')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2L4 6.5L9 11" stroke="#7C5CBF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="topnav-title">Edit Campaign</span></div>
+    <div class="stepbar"><div class="steps"><div class="step"><div class="sc done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sl done">Start</span></div><div class="sline done"></div><div class="step"><div class="sc active">2</div><span class="sl active">Campaign</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">3</div><span class="sl idle">Approve</span></div></div></div>
+    <div class="topnav"><div class="back" onclick="goTo('s3')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2L4 6.5L9 11" stroke="#7C5CBF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="topnav-title">Edit Campaign</span></div>
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0"><div class="me-scroll">
 
       <div class="me-section">
@@ -680,7 +632,7 @@ svg{display:block}
         <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5l4 4 6.5-6.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Save &amp; Back to Review
       </button>
-      <button class="me-cancel" onclick="goTo('s4')">Cancel</button>
+      <button class="me-cancel" onclick="goTo('s3')">Cancel</button>
     </div>
   </div>
 
@@ -736,7 +688,7 @@ const QA=[
 let qStep=0;const sel=new Set();const answers={};let curMulti=false;
 
 function goTo(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));setTimeout(()=>{const t=document.getElementById(id);if(t){t.classList.add('active');const sc=t.querySelector('.cs');if(sc)setTimeout(()=>sc.scrollTop=sc.scrollHeight,60);if(id==='s2')renderStores();}},150);}
-function startFlow(msg){document.getElementById('umsg').textContent=msg;goTo('s2');}
+function startFlow(msg){goTo('s3');}
 function toggleStore(el){const chk=el.querySelector('.chk'),on=chk.classList.contains('on');if(on){chk.classList.remove('on');chk.innerHTML='';el.classList.remove('sel');}else{chk.classList.add('on');chk.innerHTML='<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';el.classList.add('sel');}document.querySelector('#s2 .sc-ta').textContent=[...document.querySelectorAll('#s2 .so')].every(o=>o.classList.contains('sel'))?'Deselect All':'Select All';}
 function toggleAll(btn){const opts=[...document.querySelectorAll('#s2 .so')],allOn=opts.every(o=>o.classList.contains('sel'));opts.forEach(o=>{const chk=o.querySelector('.chk');if(allOn){o.classList.remove('sel');chk.classList.remove('on');chk.innerHTML='';}else{o.classList.add('sel');chk.classList.add('on');chk.innerHTML='<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';}});btn.textContent=allOn?'Select All':'Deselect All';}
 function toggleChip(el,val){if(!curMulti){document.querySelectorAll('#crow .chip').forEach(c=>{c.classList.remove('on');sel.delete(c.dataset.val);});}if(el.classList.contains('on')){el.classList.remove('on');sel.delete(val);}else{el.classList.add('on');sel.add(val);}el.dataset.val=val;const has=sel.size>0;document.getElementById('chint').textContent=has?`${sel.size} selected`:'';document.getElementById('cclr').className='chips-clear'+(has?' show':'');document.getElementById('cstrip').className='confirm-strip'+(has&&curMulti?' open':'');if(!curMulti&&sel.size===1)setTimeout(()=>confirmChips(),180);}
@@ -774,7 +726,7 @@ function openReview(){
   const emailTab=document.querySelector('.mctab:last-child');
   if(ch==='Email'){smsTab.classList.remove('on');emailTab.classList.add('on');document.getElementById('sms-msg').style.display='none';document.getElementById('email-msg').style.display='block';}
   else{smsTab.classList.add('on');emailTab.classList.remove('on');document.getElementById('sms-msg').style.display='block';document.getElementById('email-msg').style.display='none';}
-  goTo('s4');
+  goTo('s3');
 }
 
 function switchTab(el,type){
@@ -822,7 +774,7 @@ function saveManual() {
   document.querySelector('#sms-msg .msg-txt').innerHTML = msg.replace('[Name]','<span class="msg-hl">[Name]</span>');
   document.querySelector('.obj-val').textContent = obj.split('\n')[0];
 
-  goTo('s4');
+  goTo('s3');
 }
 
 function saveDraft() {
@@ -833,7 +785,7 @@ function saveDraft() {
   const chevron = `<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4.5 2.5l4 4-4 4" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round"/></svg>`;
   const row = document.createElement('div');
   row.className = 'rrow';
-  row.setAttribute('onclick', "goTo('s4')");
+  row.setAttribute('onclick', "goTo('s3')");
   row.innerHTML = `<div class="rdot" style="background:#F59E0B"></div><div style="flex:1"><div class="rnm">${campName}</div><div class="rsub">${channel} · ${audience} · Draft</div></div>${chevron}`;
 
   const list = document.getElementById('draft-list');
