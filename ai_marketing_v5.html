@@ -38,10 +38,13 @@ body{background:#1a1a2e;display:flex;justify-content:center;align-items:flex-sta
 .qs-section{padding:0 16px}
 .qs-lbl{font-size:10px;font-weight:600;color:#B0A8D0;letter-spacing:.1em;margin-bottom:10px}
 .qs-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:20px}
-.qs-card{background:#fff;border-radius:18px;padding:14px;border:0.5px solid #EDE9FE;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.qs-card{background:#fff;border-radius:18px;padding:14px;border:0.5px solid #EDE9FE;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;gap:0}
 .qs-card:active{background:#F5F3FF;transform:scale(.97)}
-.qs-ico{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:11px}
-.qs-name{font-size:13px;font-weight:600;color:#1A1A2E;line-height:1.3}
+.qs-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;flex-shrink:0}
+.qs-name{font-size:12px;font-weight:700;color:#1A1A2E;line-height:1.3;margin-bottom:4px}
+.qs-desc{font-size:11px;color:#9090B0;line-height:1.4;margin-bottom:10px;flex:1}
+.qs-stat{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:4px 8px;border-radius:8px;align-self:flex-start}
+.qs-arrow{display:flex;align-items:center;justify-content:space-between;margin-top:2px}
 .recent-lbl{font-size:10px;font-weight:600;color:#B0A8D0;letter-spacing:.1em;margin-bottom:10px}
 .draft-lbl{font-size:10px;font-weight:600;color:#B0A8D0;letter-spacing:.1em;margin-bottom:10px;margin-top:18px}
 .recent-card{background:#fff;border-radius:18px;border:0.5px solid #EDE9FE;overflow:hidden}
@@ -51,6 +54,23 @@ body{background:#1a1a2e;display:flex;justify-content:center;align-items:flex-sta
 .rdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .rnm{font-size:13px;font-weight:500;color:#1A1A2E}
 .rsub{font-size:11px;color:#9090B0;margin-top:2px}
+.rc-card{background:#fff;border-radius:18px;border:0.5px solid #EDE9FE;overflow:hidden;margin-bottom:9px;cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:transparent}
+.rc-card:active{background:#F8F7FF}
+.rc-top{padding:13px 14px 10px;border-bottom:0.5px solid #F5F3FF}
+.rc-name-row{display:flex;align-items:center;gap:7px;margin-bottom:10px}
+.rc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.rc-name{font-size:13px;font-weight:600;color:#1A1A2E;flex:1}
+.rc-badge{font-size:10px;font-weight:600;padding:3px 8px;border-radius:10px}
+.rc-badge.active{background:#DCFCE7;color:#15803D}
+.rc-badge.done{background:#F0EFFB;color:#7C5CBF}
+.rc-dates{display:flex;justify-content:space-between;margin-bottom:7px}
+.rc-date{font-size:10px;color:#9090B0}
+.rc-bar-bg{height:5px;background:#F0EFFB;border-radius:10px;overflow:hidden}
+.rc-bar-fill{height:100%;border-radius:10px;background:#22C55E}
+.rc-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#F5F3FF}
+.rc-metric{background:#fff;padding:10px 14px}
+.rc-mlbl{font-size:10px;color:#9090B0;margin-bottom:3px}
+.rc-mval{font-size:16px;font-weight:700;color:#1A1A2E}
 
 .fi{padding:10px 16px 20px;background:#FAF8F5;border-top:0.5px solid #EEECF8;flex-shrink:0}
 .fi-box{background:#fff;border-radius:26px;border:1px solid #EDE9FE;padding:11px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 16px rgba(124,92,191,0.09);cursor:pointer}
@@ -349,19 +369,64 @@ svg{display:block}
     <div class="sb"><span class="sbt">9:41</span><div class="sbi"><svg width="15" height="11" viewBox="0 0 15 11" fill="#1A1A2E"><rect x="0" y="4.5" width="2" height="6.5" rx="1"/><rect x="4" y="2.5" width="2" height="8.5" rx="1"/><rect x="8" y=".5" width="2" height="10.5" rx="1"/><rect x="12" y="0" width="2" height="11" rx="1"/></svg><svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x=".5" y=".5" width="20" height="11" rx="2" stroke="#1A1A2E" stroke-opacity=".3"/><rect x="2" y="2" width="14" height="8" rx="1.3" fill="#1A1A2E" opacity=".8"/></svg></div></div>
     <div class="stepbar"><div class="steps"><div class="step"><div class="sc active">1</div><span class="sl active">Start</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">2</div><span class="sl idle">Select</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">3</div><span class="sl idle">Create</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">4</div><span class="sl idle">Review</span></div><div class="sline idle"></div><div class="step"><div class="sc idle">5</div><span class="sl idle">Approve</span></div></div></div>
     <div class="s1-scroll">
-      <div class="hero"><div class="hero-ring"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><path d="M17 3L20.8 13.5H32L22.8 20L26 30.5L17 24.5L8 30.5L11.2 20L2 13.5H13.2Z" fill="white"/></svg></div><div class="hero-title">AI Marketing</div><div class="hero-sub">Tell AI what you want to promote and it will prepare a campaign for you.</div></div>
-      <div class="qs-section">
+      <div class="qs-section" style="padding-top:16px">
         <div class="qs-lbl">QUICK STARTS</div>
         <div class="qs-grid">
-          <div class="qs-card" onclick="startFlow('Promote a seasonal service for my nail salon.')"><div class="qs-ico" style="background:#FEE2D0"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><rect x="2" y="3.5" width="15" height="13" rx="2.5" stroke="#E88F6E" stroke-width="1.5"/><path d="M6.5 3.5V2M12.5 3.5V2M2 8h15" stroke="#E88F6E" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="qs-name">Promote a seasonal service</div></div>
-          <div class="qs-card" onclick="startFlow('Bring back inactive customers.')"><div class="qs-ico" style="background:#EDE9FE"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="7" cy="6.5" r="2.8" stroke="#7C5CBF" stroke-width="1.5"/><circle cx="12" cy="6.5" r="2.8" stroke="#7C5CBF" stroke-width="1.5"/><path d="M1.5 16c0-2.8 2.5-4.5 5.5-4.5M10.5 16c0-2.8 2.5-4.5 5.5-4.5" stroke="#7C5CBF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="qs-name">Bring back inactive customers</div></div>
-          <div class="qs-card" onclick="startFlow('Create this month\'s campaign.')"><div class="qs-ico" style="background:#D1FAE5"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M3 14L7.5 9.5L11 13L15 7.5L17 10" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="qs-name">Create this month's campaign</div></div>
-          <div class="qs-card" onclick="startFlow('Create a Mother\'s Day campaign for me.')"><div class="qs-ico" style="background:#FEF3C7"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M9.5 2L11.5 8H18L12.8 11.6L14.8 17.5L9.5 14L4.2 17.5L6.2 11.6L1 8H7.5Z" fill="#D97706"/></svg></div><div class="qs-name">Mother's Day campaign</div></div>
+          <div class="qs-card" onclick="startFlow('Promote a seasonal service for my nail salon.')">
+            <div class="qs-ico" style="background:#FEE2D0"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><rect x="2" y="3.5" width="15" height="13" rx="2.5" stroke="#E88F6E" stroke-width="1.5"/><path d="M6.5 3.5V2M12.5 3.5V2M2 8h15" stroke="#E88F6E" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <div class="qs-name">Seasonal Service</div>
+            <div class="qs-desc">Boost bookings before the season peaks with a timely promotion</div>
+            <div class="qs-stat" style="background:#FEE2D0;color:#C2410C">↑ 18% bookings</div>
+          </div>
+          <div class="qs-card" onclick="startFlow('Bring back inactive customers.')">
+            <div class="qs-ico" style="background:#EDE9FE"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="7" cy="6.5" r="2.8" stroke="#7C5CBF" stroke-width="1.5"/><circle cx="12" cy="6.5" r="2.8" stroke="#7C5CBF" stroke-width="1.5"/><path d="M1.5 16c0-2.8 2.5-4.5 5.5-4.5M10.5 16c0-2.8 2.5-4.5 5.5-4.5" stroke="#7C5CBF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <div class="qs-name">Re-engage Clients</div>
+            <div class="qs-desc">Win back clients who haven't visited in 30+ days</div>
+            <div class="qs-stat" style="background:#EDE9FE;color:#5B21B6">23% return rate</div>
+          </div>
+          <div class="qs-card" onclick="startFlow('Create this month\'s campaign.')">
+            <div class="qs-ico" style="background:#D1FAE5"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M3 14L7.5 9.5L11 13L15 7.5L17 10" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="qs-name">Monthly Campaign</div>
+            <div class="qs-desc">Keep clients engaged and drive steady revenue all month</div>
+            <div class="qs-stat" style="background:#D1FAE5;color:#065F46">↑ $2.1K avg rev</div>
+          </div>
+          <div class="qs-card" onclick="startFlow('Create a Mother\'s Day campaign for me.')">
+            <div class="qs-ico" style="background:#FEF3C7"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M9.5 2L11.5 8H18L12.8 11.6L14.8 17.5L9.5 14L4.2 17.5L6.2 11.6L1 8H7.5Z" fill="#D97706"/></svg></div>
+            <div class="qs-name">Mother's Day 🌸</div>
+            <div class="qs-desc">Perfect timing — clients actively look for self-care gifts</div>
+            <div class="qs-stat" style="background:#FEF3C7;color:#92400E">3.2× more bookings</div>
+          </div>
         </div>
         <div class="recent-lbl">RECENT</div>
-        <div class="recent-card">
-          <div class="rrow"><div class="rdot" style="background:#22C55E"></div><div style="flex:1"><div class="rnm">"We Miss You" Re-engagement</div><div class="rsub">SMS · 120 clients · Active</div></div><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4.5 2.5l4 4-4 4" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-          <div class="rrow"><div class="rdot" style="background:#D8D4F0"></div><div style="flex:1"><div class="rnm">VIP Birthday Offer</div><div class="rsub">SMS · 142 clients · Done</div></div><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4.5 2.5l4 4-4 4" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="rc-card" onclick="goTo('s4')">
+          <div class="rc-top">
+            <div class="rc-name-row">
+              <div class="rc-dot" style="background:#22C55E"></div>
+              <span class="rc-name">"We Miss You" Re-engagement</span>
+              <span class="rc-badge active">Active</span>
+            </div>
+            <div class="rc-dates"><span class="rc-date">Start 01/04/2026</span><span class="rc-date">End 30/04/2026</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar-fill" style="width:65%"></div></div>
+          </div>
+          <div class="rc-metrics">
+            <div class="rc-metric"><div class="rc-mlbl">Income</div><div class="rc-mval">$4.2K</div></div>
+            <div class="rc-metric"><div class="rc-mlbl">Conv. Rate</div><div class="rc-mval">23%</div></div>
+          </div>
+        </div>
+        <div class="rc-card" onclick="goTo('s4')">
+          <div class="rc-top">
+            <div class="rc-name-row">
+              <div class="rc-dot" style="background:#7C5CBF"></div>
+              <span class="rc-name">VIP Birthday Offer</span>
+              <span class="rc-badge done">Done</span>
+            </div>
+            <div class="rc-dates"><span class="rc-date">Start 01/03/2026</span><span class="rc-date">End 31/03/2026</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar-fill" style="width:100%;background:#7C5CBF"></div></div>
+          </div>
+          <div class="rc-metrics">
+            <div class="rc-metric"><div class="rc-mlbl">Income</div><div class="rc-mval">$98.4K</div></div>
+            <div class="rc-metric"><div class="rc-mlbl">Conv. Rate</div><div class="rc-mval">80%</div></div>
+          </div>
         </div>
         <div class="draft-lbl">DRAFTS</div>
         <div class="recent-card" id="draft-list">
