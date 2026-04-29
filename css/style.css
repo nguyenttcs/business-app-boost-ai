@@ -201,7 +201,10 @@ body{background:#1a1a2e;display:flex;justify-content:center;align-items:flex-sta
 .camp-header{background:linear-gradient(135deg,#F0EEFF,#EAE6FD);border-radius:18px;padding:16px;border:0.5px solid #DDD9F8}
 .ready-badge{display:inline-flex;align-items:center;gap:5px;background:#22C55E;color:#fff;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600;margin-bottom:10px}
 .camp-name{font-size:19px;font-weight:700;color:#1A1A2E;letter-spacing:-.2px;margin-bottom:5px}
-.camp-desc{font-size:13px;color:#7070A0;line-height:1.5}
+.camp-desc{font-size:13px;color:#7070A0;line-height:1.5;margin-bottom:0}
+.camp-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:13px;padding-top:13px;border-top:0.5px solid rgba(124,92,191,.15)}
+.camp-stat-lbl{font-size:9px;font-weight:600;color:#A09AC0;letter-spacing:.08em;margin-bottom:3px}
+.camp-stat-val{font-size:13px;font-weight:700;color:#1A1A2E}
 
 .why-card{background:#1E1346;border-radius:18px;padding:16px;position:relative;overflow:hidden}
 .why-card::before{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;background:rgba(167,139,250,0.12)}

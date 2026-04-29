@@ -24,25 +24,25 @@
           <div class="qs-card" onclick="startFlow('Promote a seasonal service for my nail salon.')">
             <div class="qs-ico" style="background:#FEE2D0"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><rect x="2" y="3.5" width="15" height="13" rx="2.5" stroke="#E88F6E" stroke-width="1.5"/><path d="M6.5 3.5V2M12.5 3.5V2M2 8h15" stroke="#E88F6E" stroke-width="1.5" stroke-linecap="round"/></svg></div>
             <div class="qs-name">Seasonal Service</div>
-            <div class="qs-desc">Boost bookings before the season peaks with a timely promotion</div>
+            <div class="qs-desc">Slow days coming? AI fills your calendar before the season shifts</div>
             <div class="qs-stat" style="background:#FEE2D0;color:#C2410C">↑ 18% bookings</div>
           </div>
           <div class="qs-card" onclick="startFlow('Bring back inactive customers.')">
             <div class="qs-ico" style="background:#EDE9FE"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="7" cy="6.5" r="2.8" stroke="#7C5CBF" stroke-width="1.5"/><circle cx="12" cy="6.5" r="2.8" stroke="#7C5CBF" stroke-width="1.5"/><path d="M1.5 16c0-2.8 2.5-4.5 5.5-4.5M10.5 16c0-2.8 2.5-4.5 5.5-4.5" stroke="#7C5CBF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
             <div class="qs-name">Re-engage Clients</div>
-            <div class="qs-desc">Win back clients who haven't visited in 30+ days</div>
+            <div class="qs-desc">Clients going quiet? One personal message brings them back today</div>
             <div class="qs-stat" style="background:#EDE9FE;color:#5B21B6">23% return rate</div>
           </div>
           <div class="qs-card" onclick="startFlow('Create this month\'s campaign.')">
             <div class="qs-ico" style="background:#D1FAE5"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M3 14L7.5 9.5L11 13L15 7.5L17 10" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="qs-name">Monthly Campaign</div>
-            <div class="qs-desc">Keep clients engaged and drive steady revenue all month</div>
+            <div class="qs-desc">2 minutes to set up — reach all your clients and earn all month</div>
             <div class="qs-stat" style="background:#D1FAE5;color:#065F46">↑ $2.1K avg rev</div>
           </div>
           <div class="qs-card" onclick="startFlow('Create a Mother\'s Day campaign for me.')">
             <div class="qs-ico" style="background:#FEF3C7"><svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M9.5 2L11.5 8H18L12.8 11.6L14.8 17.5L9.5 14L4.2 17.5L6.2 11.6L1 8H7.5Z" fill="#D97706"/></svg></div>
             <div class="qs-name">Mother's Day 🌸</div>
-            <div class="qs-desc">Perfect timing — clients actively look for self-care gifts</div>
+            <div class="qs-desc">Biggest booking weekend of the year — your campaign is ready now</div>
             <div class="qs-stat" style="background:#FEF3C7;color:#92400E">3.2× more bookings</div>
           </div>
         </div>
@@ -94,6 +94,40 @@
     <div class="topnav"><div class="back" onclick="goTo('s1')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2L4 6.5L9 11" stroke="#7C5CBF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="topnav-title">Campaign</span></div>
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0">
       <div class="rv-scroll">
+
+        <!-- 1. Campaign header + key stats -->
+        <div class="camp-header">
+          <div class="ready-badge"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>AI Generated</div>
+          <div class="camp-name">Mother's Day Special 🌸</div>
+          <div class="camp-desc">A warm campaign to celebrate your clients and bring them back to the salon.</div>
+          <div class="camp-stats">
+            <div class="camp-stat"><div class="camp-stat-lbl">TARGET</div><div class="camp-stat-val" id="rv-target">All Clients</div></div>
+            <div class="camp-stat"><div class="camp-stat-lbl">AUDIENCE</div><div class="camp-stat-val">~420 clients</div></div>
+            <div class="camp-stat"><div class="camp-stat-lbl">TONE</div><div class="camp-stat-val" id="rv-tone">Warm &amp; Personal</div></div>
+            <div class="camp-stat"><div class="camp-stat-lbl">CHANNEL</div><div class="camp-stat-val" id="rv-channel">SMS</div></div>
+          </div>
+        </div>
+
+        <!-- 2. Message Preview -->
+        <div class="msg-card">
+          <div class="msg-hd"><span class="msg-hd-lbl">MESSAGE PREVIEW</span><div class="msg-hd-right"><button class="btn-regen" id="btn-regen" onclick="regenMsg()"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5A4 4 0 1 1 7 1.8" stroke="#7C5CBF" stroke-width="1.5" stroke-linecap="round"/><path d="M7 0v2.5H9.5" stroke="#7C5CBF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Regenerate</button></div></div>
+          <div class="msg-body">
+            <div class="mctabs">
+              <div class="mctab on" onclick="switchTab(this,'sms')">SMS</div>
+              <div class="mctab" onclick="switchTab(this,'email')">Email</div>
+            </div>
+            <div id="sms-msg">
+              <div class="msg-bubble"><div class="msg-tag">SMS MESSAGE</div><div class="msg-txt">Hi <span class="msg-hl">[Name]</span>, Mother's Day is almost here 🌸 Treat yourself or gift someone special a relaxing nail session. We'd love to celebrate with you this weekend!</div></div>
+              <div class="msg-footer"><div class="msg-cta-pill"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>Book a visit →</div><div class="msg-note"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><circle cx="5.5" cy="5.5" r="4.5" stroke="#C4B5FD" stroke-width="1"/><path d="M5.5 4v3M5.5 8v.5" stroke="#C4B5FD" stroke-width="1" stroke-linecap="round"/></svg>Personalised per client</div></div>
+            </div>
+            <div id="email-msg" style="display:none">
+              <div class="msg-bubble"><div class="msg-tag">SUBJECT LINE</div><div class="msg-txt" style="margin-bottom:10px">We're thinking of you, <span class="msg-hl">[Name]</span> 🌸</div><div class="msg-tag">BODY</div><div class="msg-txt">Mother's Day is almost here — and we'd love to help you celebrate. Whether it's a treat for yourself or a gift for someone special, we're here to make it a beautiful moment. Book anytime this weekend!</div></div>
+              <div class="msg-footer"><div class="msg-cta-pill"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>Book a visit →</div><div class="msg-note"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><circle cx="5.5" cy="5.5" r="4.5" stroke="#C4B5FD" stroke-width="1"/><path d="M5.5 4v3M5.5 8v.5" stroke="#C4B5FD" stroke-width="1" stroke-linecap="round"/></svg>Personalised per client</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. AI Income + Why -->
         <div class="aic">
           <div class="aic-lbl"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 0.5L6.2 3.8L9.5 5L6.2 6.2L5 9.5L3.8 6.2L0.5 5L3.8 3.8Z" fill="#4ADE80"/></svg>AI ESTIMATED INCOME</div>
           <div class="aic-amt">$4,500 – $6,000</div>
@@ -113,38 +147,16 @@
             <div class="aic-bullet"><span class="aic-bico">↑</span>Mother's Day drives 3× more self-care bookings</div>
           </div>
         </div>
+
+        <!-- 4. Remaining details -->
         <div class="det-card">
-          <div class="det-camp">
-            <div class="ready-badge"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>AI Generated</div>
-            <div class="camp-name">Mother's Day Special 🌸</div>
-            <div class="camp-desc">A warm campaign to celebrate your clients and bring them back to the salon.</div>
-          </div>
-          <div class="det-hd"><span class="det-hd-lbl">CAMPAIGN DETAILS</span></div>
-          <div class="irow"><div class="irow-ico" style="background:#7C5CBF"></div><span class="irow-lbl">Audience</span><div class="irow-right"><div class="irow-val" id="rv-target">All Clients</div><div class="irow-sub">~420 clients</div></div></div>
-          <div class="irow"><div class="irow-ico" style="background:#0369A1"></div><span class="irow-lbl">Channel</span><div class="irow-right"><div class="irow-val" id="rv-channel">SMS</div><div class="irow-sub">Direct to client's phone</div></div></div>
-          <div class="irow"><div class="irow-ico" style="background:#D97706"></div><span class="irow-lbl">Tone</span><div class="irow-right"><div class="irow-val" id="rv-tone">Warm &amp; Personal</div><div class="irow-sub">Friendly, non-promotional</div></div></div>
+          <div class="det-hd"><span class="det-hd-lbl">MORE DETAILS</span></div>
           <div class="irow"><div class="irow-ico" style="background:#22C55E"></div><span class="irow-lbl">Offer</span><div class="irow-right"><div class="irow-val">No Discount</div><div class="irow-sub">Brand loyalty focus</div></div></div>
           <div class="irow"><div class="irow-ico" style="background:#A78BFA"></div><span class="irow-lbl">CTA</span><div class="irow-right"><div class="cta-val">Book a visit →</div><div class="cta-sub">salon.gci.app/book</div></div></div>
           <div class="irow"><div class="irow-ico" style="background:#9D174D"></div><span class="irow-lbl">Duration</span><div class="irow-right"><div class="irow-val">7 days</div><div class="irow-sub">Starting Apr 29</div></div></div>
           <div class="irow"><div class="irow-ico" style="background:#059669"></div><span class="irow-lbl">Timing</span><div class="irow-right"><div class="irow-val">Tue &amp; Thu · 10:00 AM</div><div class="irow-sub">Optimal open rate window</div></div></div>
         </div>
-        <div class="msg-card">
-          <div class="msg-hd"><span class="msg-hd-lbl">MESSAGE PREVIEW</span><div class="msg-hd-right"><button class="btn-regen" id="btn-regen" onclick="regenMsg()"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5A4 4 0 1 1 7 1.8" stroke="#7C5CBF" stroke-width="1.5" stroke-linecap="round"/><path d="M7 0v2.5H9.5" stroke="#7C5CBF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Regenerate</button></div></div>
-          <div class="msg-body">
-            <div class="mctabs">
-              <div class="mctab on" onclick="switchTab(this,'sms')">SMS</div>
-              <div class="mctab" onclick="switchTab(this,'email')">Email</div>
-            </div>
-            <div id="sms-msg">
-              <div class="msg-bubble"><div class="msg-tag">SMS MESSAGE</div><div class="msg-txt">Hi <span class="msg-hl">[Name]</span>, Mother's Day is almost here 🌸 Treat yourself or gift someone special a relaxing nail session. We'd love to celebrate with you this weekend!</div></div>
-              <div class="msg-footer"><div class="msg-cta-pill"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>Book a visit →</div><div class="msg-note"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><circle cx="5.5" cy="5.5" r="4.5" stroke="#C4B5FD" stroke-width="1"/><path d="M5.5 4v3M5.5 8v.5" stroke="#C4B5FD" stroke-width="1" stroke-linecap="round"/></svg>Personalised per client</div></div>
-            </div>
-            <div id="email-msg" style="display:none">
-              <div class="msg-bubble"><div class="msg-tag">SUBJECT LINE</div><div class="msg-txt" style="margin-bottom:10px">We're thinking of you, <span class="msg-hl">[Name]</span> 🌸</div><div class="msg-tag">BODY</div><div class="msg-txt">Mother's Day is almost here — and we'd love to help you celebrate. Whether it's a treat for yourself or a gift for someone special, we're here to make it a beautiful moment. Book anytime this weekend!</div></div>
-              <div class="msg-footer"><div class="msg-cta-pill"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>Book a visit →</div><div class="msg-note"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><circle cx="5.5" cy="5.5" r="4.5" stroke="#C4B5FD" stroke-width="1"/><path d="M5.5 4v3M5.5 8v.5" stroke="#C4B5FD" stroke-width="1" stroke-linecap="round"/></svg>Personalised per client</div></div>
-            </div>
-          </div>
-        </div>
+
       </div>
       <div class="actions-bar">
         <div class="ai-upd-notif show" id="ai-upd-notif" onclick="goTo('s3b')">
