@@ -1,0 +1,220 @@
+const STORES=[
+  {id:'downtown',name:'Luxe Nails Downtown',area:'Main Street',color:'#E88F6E'},
+  {id:'westside',name:'Luxe Nails Westside',area:'Oak Avenue',color:'#7C5CBF'},
+  {id:'eastgate',name:'Luxe Nails Eastgate',area:'River Plaza',color:'#059669'},
+  {id:'northgate',name:'Luxe Nails Northgate',area:'Pine Boulevard',color:'#D97706'},
+  {id:'southpark',name:'Luxe Nails Southpark',area:'Harbor Drive',color:'#9D174D'},
+  {id:'midtown',name:'Luxe Nails Midtown',area:'Central Avenue',color:'#0369A1'},
+  {id:'lakeside',name:'Luxe Nails Lakeside',area:'Lakeview Road',color:'#7C3AED'},
+];
+const selStores=new Set(STORES.map(s=>s.id));
+
+function renderStores(q=''){
+  const list=document.getElementById('sl-list');if(!list)return;
+  const flt=STORES.filter(s=>!q||s.name.toLowerCase().includes(q.toLowerCase())||s.area.toLowerCase().includes(q.toLowerCase()));
+  const chkSvg='<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  list.innerHTML=flt.length?flt.map(s=>`<div class="sl-row${selStores.has(s.id)?' sel':''}" onclick="toggleStoreById('${s.id}',this)"><div class="sl-init" style="background:${s.color}">${s.name.split(' ').pop()[0]}</div><div class="sl-info"><div class="sl-nm">${s.name}</div><div class="sl-ar">${s.area}</div></div><div class="sl-chk${selStores.has(s.id)?' on':''}">${selStores.has(s.id)?chkSvg:''}</div></div>`).join(''):'<div class="sl-empty">No stores found</div>';
+  updateStoreUI();
+}
+function toggleStoreById(id,row){
+  const chkSvg='<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const c=row.querySelector('.sl-chk');
+  if(selStores.has(id)){selStores.delete(id);row.classList.remove('sel');c.classList.remove('on');c.innerHTML='';}
+  else{selStores.add(id);row.classList.add('sel');c.classList.add('on');c.innerHTML=chkSvg;}
+  updateStoreUI();
+}
+function filterStores(q){renderStores(q);}
+function toggleAllStores(){
+  const inp=document.getElementById('sl-inp');
+  if(selStores.size===STORES.length)selStores.clear();else STORES.forEach(s=>selStores.add(s.id));
+  renderStores(inp?inp.value:'');
+}
+function updateStoreUI(){
+  const n=selStores.size,T=STORES.length;
+  const badge=document.getElementById('sl-badge'),txt=document.getElementById('sl-sel-txt'),tog=document.getElementById('sl-tog'),btn=document.getElementById('sl-btn');
+  if(badge){badge.textContent=n;badge.className='sl-badge'+(n===0?' none':'');}
+  if(txt)txt.textContent=n===T?`All ${T} selected`:n===0?'None selected':`${n} of ${T} selected`;
+  if(tog)tog.textContent=n===T?'Deselect All':'Select All';
+  if(btn){btn.disabled=n===0;btn.textContent=n===0?'Select at least one store':`Continue · ${n} store${n>1?'s':''}`;}
+}
+
+const QA=[
+  {q:'💬 What tone should the message have?',hint:'You can pick multiple',multi:true,chips:['Warm & Personal','Exciting & Urgent','Professional','Playful'],ph:'Or describe the tone...'},
+  {q:'🎁 Include a special offer?',hint:'Pick one',multi:false,chips:['No discount','% Discount','Free Add-on'],ph:'Or describe your offer...'},
+  {q:'📣 How should we send this?',hint:'You can pick multiple',multi:true,chips:['SMS','Email','SMS + Email'],ph:'Or type channel preference...'}
+];
+let qStep=0;const sel=new Set();const answers={};let curMulti=false;
+
+function goTo(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));setTimeout(()=>{const t=document.getElementById(id);if(t){t.classList.add('active');const sc=t.querySelector('.cs');if(sc)setTimeout(()=>sc.scrollTop=sc.scrollHeight,60);if(id==='s2')renderStores();}},150);}
+function startFlow(msg){goTo('s3');}
+function toggleStore(el){const chk=el.querySelector('.chk'),on=chk.classList.contains('on');if(on){chk.classList.remove('on');chk.innerHTML='';el.classList.remove('sel');}else{chk.classList.add('on');chk.innerHTML='<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';el.classList.add('sel');}document.querySelector('#s2 .sc-ta').textContent=[...document.querySelectorAll('#s2 .so')].every(o=>o.classList.contains('sel'))?'Deselect All':'Select All';}
+function toggleAll(btn){const opts=[...document.querySelectorAll('#s2 .so')],allOn=opts.every(o=>o.classList.contains('sel'));opts.forEach(o=>{const chk=o.querySelector('.chk');if(allOn){o.classList.remove('sel');chk.classList.remove('on');chk.innerHTML='';}else{o.classList.add('sel');chk.classList.add('on');chk.innerHTML='<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';}});btn.textContent=allOn?'Select All':'Deselect All';}
+function toggleChip(el,val){if(!curMulti){document.querySelectorAll('#crow .chip').forEach(c=>{c.classList.remove('on');sel.delete(c.dataset.val);});}if(el.classList.contains('on')){el.classList.remove('on');sel.delete(val);}else{el.classList.add('on');sel.add(val);}el.dataset.val=val;const has=sel.size>0;document.getElementById('chint').textContent=has?`${sel.size} selected`:'';document.getElementById('cclr').className='chips-clear'+(has?' show':'');document.getElementById('cstrip').className='confirm-strip'+(has&&curMulti?' open':'');if(!curMulti&&sel.size===1)setTimeout(()=>confirmChips(),180);}
+function clearChips(){sel.clear();document.querySelectorAll('#crow .chip').forEach(c=>c.classList.remove('on'));document.getElementById('chint').textContent='';document.getElementById('cclr').className='chips-clear';document.getElementById('cstrip').className='confirm-strip';}
+function confirmChips(){if(!sel.size)return;const val=[...sel].join(' + ');clearChips();sendAnswer(val);}
+function sendTyped(){const inp=document.getElementById('s3inp'),val=inp.value.trim();if(!val)return;inp.value='';clearChips();sendAnswer(val);}
+
+function sendAnswer(val){
+  answers['q'+qStep]=val;
+  const chat=document.getElementById('s3chat'),crow=document.getElementById('crow'),inp=document.getElementById('s3inp');
+  crow.innerHTML='';
+  const ub=document.createElement('div');ub.className='br u';ub.innerHTML=`<div class="b usr">${val}</div>`;chat.appendChild(ub);chat.scrollTop=chat.scrollHeight;
+  if(qStep<QA.length){
+    const tr=document.createElement('div');tr.className='br';tr.innerHTML=`<div class="bav"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L8 5.5L13 6.5L8 7.5L6.5 12L5 7.5L0 6.5L5 5.5Z" fill="white"/></svg></div><div class="typing"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;chat.appendChild(tr);chat.scrollTop=chat.scrollHeight;
+    const q=QA[qStep];qStep++;
+    setTimeout(()=>{chat.removeChild(tr);const ab=document.createElement('div');ab.className='br';ab.innerHTML=`<div class="bav"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L8 5.5L13 6.5L8 7.5L6.5 12L5 7.5L0 6.5L5 5.5Z" fill="white"/></svg></div><div class="b ai">${q.q}<span class="b-hint">${q.hint}</span></div>`;chat.appendChild(ab);curMulti=q.multi;q.chips.forEach(c=>{const ch=document.createElement('div');ch.className='chip';ch.dataset.val=c;ch.innerHTML=`<svg class="chk-ico" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>${c}`;ch.onclick=()=>toggleChip(ch,c);crow.appendChild(ch);});inp.placeholder=q.ph;chat.scrollTop=chat.scrollHeight;},900);
+  } else {
+    const tr=document.createElement('div');tr.className='br';tr.innerHTML=`<div class="bav"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L8 5.5L13 6.5L8 7.5L6.5 12L5 7.5L0 6.5L5 5.5Z" fill="white"/></svg></div><div class="typing"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;chat.appendChild(tr);chat.scrollTop=chat.scrollHeight;
+    setTimeout(()=>{
+      chat.removeChild(tr);
+      const ab=document.createElement('div');ab.className='br';ab.innerHTML=`<div class="bav"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L8 5.5L13 6.5L8 7.5L6.5 12L5 7.5L0 6.5L5 5.5Z" fill="white"/></svg></div><div class="b ai">Perfect! Here's your campaign. Ready to review? 🎉</div>`;chat.appendChild(ab);
+      const dw=document.createElement('div');
+      dw.innerHTML=`<div class="dk"><div class="dh"><div class="dtag"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6L1 9.5L4.5 8.5L6 10.5L6 7L9.5 4.5L7.5 2.5L4.5 6L1 4L2 6Z" fill="#7C5CBF"/></svg>CAMPAIGN DRAFT</div><div class="dtitle">Mother's Day Special 🌸</div></div><div class="db"><div class="dgrid"><div><div class="dfl">TARGET</div><div class="dfv">${answers['q0']||'All Clients'}</div></div><div><div class="dfl">AUDIENCE</div><div class="dfv">~420 clients</div></div><div><div class="dfl">TONE</div><div class="dfv">${answers['q1']||'Warm & Personal'}</div></div><div><div class="dfl">CHANNEL</div><div class="dfv">${answers['q2']||'SMS'}</div></div></div><div style="height:0.5px;background:#F0EFFB;margin:10px 0"></div><div style="font-size:10px;font-weight:600;color:#B0A8D0;letter-spacing:.06em;margin-bottom:8px">MESSAGE PREVIEW</div><div class="dmsg">"Hi [Name], Mother's Day is almost here 🌸 Treat yourself or gift someone special a relaxing nail session. We'd love to celebrate with you!"</div></div></div><div class="acts"><button class="btn-approve" onclick="openReview()"><div class="shine"></div><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5l4 4 6.5-6.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Review Campaign</button><div class="btn-row2"><button class="btn-ai" onclick="goTo('s3b')"><svg class="spin" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L8.5 5.5L13 7L8.5 8.5L7 13L5.5 8.5L1 7L5.5 5.5Z" fill="#C4B5FD"/></svg>Revise with AI</button><button class="btn-edit" onclick="goTo('s5m')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 2.5l2 2-6.5 6.5H2v-2l6.5-6.5z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Edit Manually</button></div><button class="btn-save" onclick="saveDraft()"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="2" y="1.5" width="9" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4.5 5h4M4.5 7.5h3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>Save Draft</button></div>`;
+      chat.appendChild(dw);inp.placeholder='Ask to refine this campaign...';document.getElementById('chint').textContent='';chat.scrollTop=chat.scrollHeight;
+    },1800);
+  }
+}
+
+function openReview(){
+  document.getElementById('rv-target').textContent=answers['q0']||'All Clients';
+  document.getElementById('rv-tone').textContent=answers['q1']||'Warm & Personal';
+  const ch=answers['q2']||'SMS + Email';
+  document.getElementById('rv-channel').textContent=ch;
+  const smsTab=document.querySelector('.mctab:first-child');
+  const emailTab=document.querySelector('.mctab:last-child');
+  if(ch==='Email'){smsTab.classList.remove('on');emailTab.classList.add('on');document.getElementById('sms-msg').style.display='none';document.getElementById('email-msg').style.display='block';}
+  else{smsTab.classList.add('on');emailTab.classList.remove('on');document.getElementById('sms-msg').style.display='block';document.getElementById('email-msg').style.display='none';}
+  goTo('s3');
+}
+
+function switchTab(el,type){
+  document.querySelectorAll('.mctab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('sms-msg').style.display=type==='sms'?'block':'none';
+  document.getElementById('email-msg').style.display=type==='email'?'block':'none';
+}
+
+renderStores();
+
+function resetAll(){
+  goTo('s1');
+}
+
+function pickOne(el, groupId) {
+  document.querySelectorAll('#'+groupId+' .me-chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  // Show discount input if applicable
+  if(groupId==='me-offer-chips'){
+    const isDiscount = el.textContent.includes('Discount') || el.textContent.includes('Add-on');
+    document.getElementById('me-offer-input-wrap').style.display = isDiscount ? 'block' : 'none';
+  }
+}
+function pickMulti(el) {
+  el.classList.toggle('on');
+}
+function saveManual() {
+  // Read values and update Review screen
+  const name = document.getElementById('me-name').value || 'Mother\'s Day Special';
+  const obj = document.getElementById('me-obj').value;
+  const msg = document.getElementById('me-msg').value;
+  const tone = [...document.querySelectorAll('#me-tone-chips .me-chip.on')].map(c=>c.textContent).join(' + ') || 'Warm & Personal';
+  const audience = document.querySelector('#me-audience-chips .me-chip.on')?.textContent || 'All Clients';
+
+  // Update Review
+  document.querySelector('.camp-name').textContent = name;
+  document.getElementById('rv-target').textContent = audience;
+  document.getElementById('rv-tone').textContent = tone;
+  document.querySelector('#sms-msg .msg-txt').innerHTML = msg.replace('[Name]','<span class="msg-hl">[Name]</span>');
+  document.querySelector('.obj-val').textContent = obj.split('\n')[0];
+
+  goTo('s3');
+}
+
+function saveDraft() {
+  const campName = document.querySelector('.camp-name')?.textContent || "Mother's Day Special 🌸";
+  const channel = document.getElementById('rv-channel')?.textContent || 'SMS';
+  const audience = document.getElementById('rv-target')?.textContent || 'All Clients';
+
+  const chevron = `<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4.5 2.5l4 4-4 4" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+  const row = document.createElement('div');
+  row.className = 'rrow';
+  row.setAttribute('onclick', "goTo('s3')");
+  row.innerHTML = `<div class="rdot" style="background:#F59E0B"></div><div style="flex:1"><div class="rnm">${campName}</div><div class="rsub">${channel} · ${audience} · Draft</div></div>${chevron}`;
+
+  const list = document.getElementById('draft-list');
+  list.insertBefore(row, list.firstChild);
+
+  const toast = document.getElementById('draft-toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2200);
+
+  setTimeout(() => goTo('s1'), 400);
+}
+
+const SMS_VARIANTS = [
+  {txt:`Hi <span class="msg-hl">[Name]</span>, Mother's Day is almost here 🌸 Treat yourself or gift someone special a relaxing nail session. We'd love to celebrate with you this weekend!`, cta:'Book a visit →'},
+  {txt:`Hey <span class="msg-hl">[Name]</span>! 💅 Mother's Day is the perfect excuse to show yourself some love. Come in for a fresh set and leave feeling amazing. Limited slots this week!`, cta:'Book your spot →'},
+  {txt:`<span class="msg-hl">[Name]</span>, you deserve to be pampered 🌷 This Mother's Day, let us take care of you. Book a visit and enjoy the calm before the celebration.`, cta:'Reserve now →'},
+];
+const EMAIL_VARIANTS = [
+  {subj:`We're thinking of you, <span class="msg-hl">[Name]</span> 🌸`, body:`Mother's Day is almost here — and we'd love to help you celebrate. Whether it's a treat for yourself or a gift for someone special, we're here to make it a beautiful moment. Book anytime this weekend!`},
+  {subj:`A little pampering goes a long way, <span class="msg-hl">[Name]</span> 💅`, body:`Mother's Day is the perfect time to pause, breathe, and treat yourself. Our team is ready to give you a fresh look you'll love. Slots are filling up — grab yours before they're gone.`},
+  {subj:`You deserve this, <span class="msg-hl">[Name]</span> 🌷`, body:`This Mother's Day, gift yourself something beautiful. A fresh set, a relaxing session, and a moment just for you. We'd love to see you — book your appointment today.`},
+];
+let _regenIdx = 0;
+function regenMsg() {
+  _regenIdx = (_regenIdx + 1) % SMS_VARIANTS.length;
+  const btn = document.getElementById('btn-regen');
+  btn.classList.add('spinning');
+  setTimeout(() => btn.classList.remove('spinning'), 500);
+
+  const sms = SMS_VARIANTS[_regenIdx];
+  const email = EMAIL_VARIANTS[_regenIdx];
+
+  document.querySelector('#sms-msg .msg-txt').innerHTML = sms.txt;
+  document.querySelector('#sms-msg .msg-cta-pill').innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>${sms.cta}`;
+
+  const emailBubble = document.querySelector('#email-msg .msg-bubble');
+  emailBubble.innerHTML = `<div class="msg-tag">SUBJECT LINE</div><div class="msg-txt" style="margin-bottom:10px">${email.subj}</div><div class="msg-tag">BODY</div><div class="msg-txt">${email.body}</div>`;
+  document.querySelector('#email-msg .msg-cta-pill').innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>Book a visit →`;
+}
+
+function aiToggleSend(inp) {
+  document.getElementById('ai-chat-send').classList.toggle('vis', inp.value.trim().length > 0);
+}
+
+const _aiEdits = [
+  {desc:"An elevated campaign celebrating your clients with premium, exclusive vibes.", sms:`Hi <span class="msg-hl">[Name]</span>, this Mother's Day 🌸 indulge in a little luxury — a bespoke nail experience crafted just for you. We'd be honoured to be part of your celebration.`, cta:'Reserve your spot →'},
+  {desc:"A warm, direct campaign that creates urgency without feeling pushy.", sms:`Hey <span class="msg-hl">[Name]</span>! 💅 Mother's Day slots are filling up fast. Lock in your appointment now — you deserve this moment for yourself.`, cta:'Book now →'},
+  {desc:"A heartfelt, personal message that feels genuine and caring.", sms:`<span class="msg-hl">[Name]</span>, you deserve to feel amazing this Mother's Day 🌷 Come in for a relaxing session — just for you. We'd love to see you!`, cta:'Book a visit →'},
+];
+let _aiEditIdx = 0;
+
+function sendAiEdit() {
+  const inp = document.getElementById('ai-chat-inp');
+  if (!inp.value.trim()) return;
+  inp.value = '';
+  inp.placeholder = 'AI is updating…';
+  inp.disabled = true;
+
+  setTimeout(() => {
+    _aiEditIdx = (_aiEditIdx + 1) % _aiEdits.length;
+    const u = _aiEdits[_aiEditIdx];
+
+    const desc = document.querySelector('#s3 .camp-desc');
+    if (desc) desc.textContent = u.desc;
+
+    const smsTxt = document.querySelector('#sms-msg .msg-txt');
+    if (smsTxt) smsTxt.innerHTML = u.sms;
+    const smsCta = document.querySelector('#sms-msg .msg-cta-pill');
+    if (smsCta) smsCta.innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>${u.cta}`;
+
+    const txt = document.getElementById('ai-upd-txt');
+    if (txt) txt.innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 1L6.8 4.2L10.5 5.5L6.8 6.8L5.5 10L4.2 6.8L0.5 5.5L4.2 4.2Z" fill="#7C5CBF"/></svg>AI updated your Campaign Draft`;
+    const t = document.getElementById('ai-upd-toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+    inp.placeholder = 'Ask AI to tweak this campaign…';
+    inp.disabled = false;
+  }, 1100);
+}
