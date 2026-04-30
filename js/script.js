@@ -195,6 +195,15 @@ function showTip(el, msg) {
   tip.style.left = Math.min(Math.max(8, er.left - pr.left - 8), 180) + 'px';
   tip.style.top = (er.bottom - pr.top + 5) + 'px';
   tip.style.opacity = '1';
+  setTimeout(() => {
+    document.addEventListener('click', function closeTip(e) {
+      if (!e.target.classList.contains('tip-ico')) {
+        const t = document.getElementById('stat-tip');
+        if (t) { t.style.opacity = '0'; t._anchor = null; }
+      }
+      document.removeEventListener('click', closeTip);
+    });
+  }, 0);
 }
 
 function aiToggleSend(inp) {
@@ -227,6 +236,8 @@ function sendAiEdit() {
     const smsCta = document.querySelector('#sms-msg .msg-cta-pill');
     if (smsCta) smsCta.innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>${u.cta}`;
 
+    const notif = document.getElementById('ai-upd-notif');
+    if (notif) notif.classList.add('show');
     const txt = document.getElementById('ai-upd-txt');
     if (txt) txt.innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 1L6.8 4.2L10.5 5.5L6.8 6.8L5.5 10L4.2 6.8L0.5 5.5L4.2 4.2Z" fill="#7C5CBF"/></svg>AI updated your Campaign Draft`;
     const t = document.getElementById('ai-upd-toast');

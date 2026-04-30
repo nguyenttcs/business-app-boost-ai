@@ -1391,6 +1391,11 @@ body {
     font-weight: 600;
     color: #1A1A2E
 }
+.topnav-badge {
+    font-size: 9px;
+    padding: 2px 7px;
+    gap: 3px
+}
 
 .rv-scroll {
     flex: 1;
@@ -1440,10 +1445,10 @@ body {
 }
 
 .camp-name {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 700;
     color: #1A1A2E;
-    letter-spacing: -.1px
+    letter-spacing: -.2px
 }
 
 .camp-desc {
