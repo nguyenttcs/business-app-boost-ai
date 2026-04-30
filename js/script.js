@@ -100,6 +100,15 @@ function resetAll(){
   goTo('s1');
 }
 
+function toggleDetails(){
+  const body=document.getElementById('det-body');
+  const chevron=document.getElementById('det-chevron');
+  const hd=document.querySelector('.det-hd');
+  body.classList.toggle('open');
+  chevron.classList.toggle('open');
+  hd.classList.toggle('open');
+}
+
 function pickOne(el, groupId) {
   document.querySelectorAll('#'+groupId+' .me-chip').forEach(c=>c.classList.remove('on'));
   el.classList.add('on');
