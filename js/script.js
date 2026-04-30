@@ -76,14 +76,8 @@ function sendAnswer(val){
 }
 
 function openReview(){
-  document.getElementById('rv-target').textContent=answers['q0']||'All Clients';
-  document.getElementById('rv-tone').textContent=answers['q1']||'Warm & Personal';
-  const ch=answers['q2']||'SMS + Email';
-  document.getElementById('rv-channel').textContent=ch;
-  const smsTab=document.querySelector('.mctab:first-child');
-  const emailTab=document.querySelector('.mctab:last-child');
-  if(ch==='Email'){smsTab.classList.remove('on');emailTab.classList.add('on');document.getElementById('sms-msg').style.display='none';document.getElementById('email-msg').style.display='block';}
-  else{smsTab.classList.add('on');emailTab.classList.remove('on');document.getElementById('sms-msg').style.display='block';document.getElementById('email-msg').style.display='none';}
+  const t=document.getElementById('rv-target');
+  if(t) t.textContent=answers['q0']||'All Clients';
   goTo('s3');
 }
 
@@ -161,9 +155,9 @@ function saveDraft() {
 }
 
 const SMS_VARIANTS = [
-  {txt:`Hi <span class="msg-hl">[Name]</span>, Mother's Day is almost here 🌸 Treat yourself or gift someone special a relaxing nail session. We'd love to celebrate with you this weekend!`, cta:'Book a visit →'},
-  {txt:`Hey <span class="msg-hl">[Name]</span>! 💅 Mother's Day is the perfect excuse to show yourself some love. Come in for a fresh set and leave feeling amazing. Limited slots this week!`, cta:'Book your spot →'},
-  {txt:`<span class="msg-hl">[Name]</span>, you deserve to be pampered 🌷 This Mother's Day, let us take care of you. Book a visit and enjoy the calm before the celebration.`, cta:'Reserve now →'},
+  {txt:`Hi <span class="msg-hl">[Name]</span>, Mother's Day is almost here 🌸 Enjoy <strong>15% OFF</strong> your next visit — treat yourself or gift someone special a relaxing nail session. Book this weekend!`, cta:'Book a visit →'},
+  {txt:`Hey <span class="msg-hl">[Name]</span>! 💅 Mother's Day treat: <strong>15% OFF</strong> for you this week only. Come in for a fresh set and leave feeling amazing. Limited slots!`, cta:'Book your spot →'},
+  {txt:`<span class="msg-hl">[Name]</span>, you deserve to be pampered 🌷 This Mother's Day, enjoy <strong>15% OFF</strong> — let us take care of you. Book your visit before slots fill up!`, cta:'Reserve now →'},
 ];
 const EMAIL_VARIANTS = [
   {subj:`We're thinking of you, <span class="msg-hl">[Name]</span> 🌸`, body:`Mother's Day is almost here — and we'd love to help you celebrate. Whether it's a treat for yourself or a gift for someone special, we're here to make it a beautiful moment. Book anytime this weekend!`},
@@ -176,16 +170,31 @@ function regenMsg() {
   const btn = document.getElementById('btn-regen');
   btn.classList.add('spinning');
   setTimeout(() => btn.classList.remove('spinning'), 500);
-
   const sms = SMS_VARIANTS[_regenIdx];
-  const email = EMAIL_VARIANTS[_regenIdx];
+  const smsTxt = document.querySelector('#sms-msg .msg-txt');
+  if(smsTxt) smsTxt.innerHTML = sms.txt;
+}
 
-  document.querySelector('#sms-msg .msg-txt').innerHTML = sms.txt;
-  document.querySelector('#sms-msg .msg-cta-pill').innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>${sms.cta}`;
-
-  const emailBubble = document.querySelector('#email-msg .msg-bubble');
-  emailBubble.innerHTML = `<div class="msg-tag">SUBJECT LINE</div><div class="msg-txt" style="margin-bottom:10px">${email.subj}</div><div class="msg-tag">BODY</div><div class="msg-txt">${email.body}</div>`;
-  document.querySelector('#email-msg .msg-cta-pill').innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M9.5 5.5L1.5 1.5l1.5 4-1.5 4L9.5 5.5z" fill="#5B21B6"/></svg>Book a visit →`;
+function showTip(el, msg) {
+  let tip = document.getElementById('stat-tip');
+  if (tip && tip._anchor === el && tip.style.opacity === '1') {
+    tip.style.opacity = '0';
+    tip._anchor = null;
+    return;
+  }
+  if (!tip) {
+    tip = document.createElement('div');
+    tip.id = 'stat-tip';
+    tip.className = 'stat-tip';
+    document.querySelector('.phone').appendChild(tip);
+  }
+  tip.textContent = msg;
+  tip._anchor = el;
+  const er = el.getBoundingClientRect();
+  const pr = document.querySelector('.phone').getBoundingClientRect();
+  tip.style.left = Math.min(Math.max(8, er.left - pr.left - 8), 180) + 'px';
+  tip.style.top = (er.bottom - pr.top + 5) + 'px';
+  tip.style.opacity = '1';
 }
 
 function aiToggleSend(inp) {
