@@ -155,9 +155,9 @@ function saveDraft() {
 }
 
 const SMS_VARIANTS = [
-  {txt:`Hi <span class="msg-hl">[Name]</span>, Mother's Day is almost here 🌸 Enjoy <strong>15% OFF</strong> your next visit — treat yourself or gift someone special a relaxing nail session. Book this weekend!`, cta:'Book a visit →'},
-  {txt:`Hey <span class="msg-hl">[Name]</span>! 💅 Mother's Day treat: <strong>15% OFF</strong> for you this week only. Come in for a fresh set and leave feeling amazing. Limited slots!`, cta:'Book your spot →'},
-  {txt:`<span class="msg-hl">[Name]</span>, you deserve to be pampered 🌷 This Mother's Day, enjoy <strong>15% OFF</strong> — let us take care of you. Book your visit before slots fill up!`, cta:'Reserve now →'},
+  {txt:`Hi <span class="msg-hl">[Name]</span>, Mother's Day is almost here! Enjoy 15% OFF your next visit. Treat yourself or gift someone special a relaxing nail session. Book this weekend!`, cta:'Book a visit →'},
+  {txt:`Hey <span class="msg-hl">[Name]</span>! Mother's Day treat: 15% OFF for you this week only. Come in for a fresh set and leave feeling amazing. Limited slots!`, cta:'Book your spot →'},
+  {txt:`<span class="msg-hl">[Name]</span>, you deserve to be pampered. This Mother's Day, enjoy 15% OFF. Let us take care of you. Book your visit before slots fill up!`, cta:'Reserve now →'},
 ];
 const EMAIL_VARIANTS = [
   {subj:`We're thinking of you, <span class="msg-hl">[Name]</span> 🌸`, body:`Mother's Day is almost here — and we'd love to help you celebrate. Whether it's a treat for yourself or a gift for someone special, we're here to make it a beautiful moment. Book anytime this weekend!`},
@@ -210,16 +210,92 @@ function aiToggleSend(inp) {
   document.getElementById('ai-chat-send').classList.toggle('vis', inp.value.trim().length > 0);
 }
 
+let _sheetHistory = [];
+
+function openAiSheet() {
+  const backdrop = document.getElementById('ai-sheet-backdrop');
+  const sheet = document.getElementById('ai-sheet');
+  backdrop.classList.add('open');
+  sheet.classList.add('open');
+  renderSheetChat();
+  const chat = document.getElementById('ai-sheet-chat');
+  setTimeout(() => { chat.scrollTop = chat.scrollHeight; }, 50);
+  initSheetSwipe(sheet);
+}
+
+function closeAiSheet() {
+  document.getElementById('ai-sheet-backdrop').classList.remove('open');
+  document.getElementById('ai-sheet').classList.remove('open');
+}
+
+function renderSheetChat() {
+  const chat = document.getElementById('ai-sheet-chat');
+  if (!_sheetHistory.length) {
+    chat.innerHTML = '<div style="font-size:12px;color:#B0A8D0;text-align:center;margin-top:20px">AI updated your campaign based on your request.</div>';
+    return;
+  }
+  chat.innerHTML = _sheetHistory.map(m => {
+    if (m.role === 'user') return `<div class="ai-sheet-bubble-usr">${m.text}</div>`;
+    return `<div style="display:flex;flex-direction:column;gap:4px">
+      <div class="ai-sheet-bubble-ai">${m.text}</div>
+      ${m.wc ? `<div class="ai-sheet-wc">
+        <div class="ai-sheet-wc-hd">What changed</div>
+        ${m.wc.map(r=>`<div class="ai-sheet-wc-row"><div class="ai-sheet-wc-dot" style="background:${r.c}"></div><span class="ai-sheet-wc-lbl">${r.l}</span><span>${r.v}</span></div>`).join('')}
+      </div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function sendSheetEdit() {
+  const inp = document.getElementById('ai-sheet-inp-field');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  _sheetHistory.push({ role: 'user', text });
+  renderSheetChat();
+  const chat = document.getElementById('ai-sheet-chat');
+  const typing = document.createElement('div');
+  typing.className = 'ai-sheet-typing';
+  typing.innerHTML = '<span></span><span></span><span></span>';
+  chat.appendChild(typing);
+  chat.scrollTop = chat.scrollHeight;
+  setTimeout(() => {
+    typing.remove();
+    _aiEditIdx = (_aiEditIdx + 1) % _aiEdits.length;
+    const u = _aiEdits[_aiEditIdx];
+    const desc = document.querySelector('#s3 .camp-desc');
+    if (desc) desc.textContent = u.desc;
+    const smsTxt = document.querySelector('#sms-msg .msg-txt');
+    if (smsTxt) smsTxt.innerHTML = u.sms;
+    _sheetHistory.push({ role: 'ai', text: 'Done! Here\'s what I updated:', wc: [
+      { c:'#A78BFA', l:'Schedule', v:'Apr 29 – May 6' },
+      { c:'#F4A4C0', l:'Offer', v:'15% OFF added' },
+    ]});
+    renderSheetChat();
+    chat.scrollTop = chat.scrollHeight;
+  }, 1000);
+}
+
+function initSheetSwipe(sheet) {
+  let startY = 0;
+  sheet.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, { passive: true });
+  sheet.addEventListener('touchend', e => {
+    if (e.changedTouches[0].clientY - startY > 60) closeAiSheet();
+  }, { passive: true });
+}
+
 const _aiEdits = [
-  {desc:"An elevated campaign celebrating your clients with premium, exclusive vibes.", sms:`Hi <span class="msg-hl">[Name]</span>, this Mother's Day 🌸 indulge in a little luxury — a bespoke nail experience crafted just for you. We'd be honoured to be part of your celebration.`, cta:'Reserve your spot →'},
-  {desc:"A warm, direct campaign that creates urgency without feeling pushy.", sms:`Hey <span class="msg-hl">[Name]</span>! 💅 Mother's Day slots are filling up fast. Lock in your appointment now — you deserve this moment for yourself.`, cta:'Book now →'},
-  {desc:"A heartfelt, personal message that feels genuine and caring.", sms:`<span class="msg-hl">[Name]</span>, you deserve to feel amazing this Mother's Day 🌷 Come in for a relaxing session — just for you. We'd love to see you!`, cta:'Book a visit →'},
+  {desc:"An elevated campaign celebrating your clients with premium, exclusive vibes.", sms:`Hi <span class="msg-hl">[Name]</span>, this Mother's Day indulge in a little luxury. A bespoke nail experience crafted just for you. We'd be honoured to be part of your celebration.`, cta:'Reserve your spot →'},
+  {desc:"A warm, direct campaign that creates urgency without feeling pushy.", sms:`Hey <span class="msg-hl">[Name]</span>! Mother's Day slots are filling up fast. Lock in your appointment now. You deserve this moment for yourself.`, cta:'Book now →'},
+  {desc:"A heartfelt, personal message that feels genuine and caring.", sms:`<span class="msg-hl">[Name]</span>, you deserve to feel amazing this Mother's Day. Come in for a relaxing session, just for you. We'd love to see you!`, cta:'Book a visit →'},
 ];
 let _aiEditIdx = 0;
+let _lastAiMsg = '';
 
 function sendAiEdit() {
   const inp = document.getElementById('ai-chat-inp');
   if (!inp.value.trim()) return;
+  _lastAiMsg = inp.value.trim();
   inp.value = '';
   inp.placeholder = 'AI is updating…';
   inp.disabled = true;
@@ -240,6 +316,11 @@ function sendAiEdit() {
     if (notif) notif.classList.add('show');
     const txt = document.getElementById('ai-upd-txt');
     if (txt) txt.innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 1L6.8 4.2L10.5 5.5L6.8 6.8L5.5 10L4.2 6.8L0.5 5.5L4.2 4.2Z" fill="#7C5CBF"/></svg>AI updated your Campaign Draft`;
+    _sheetHistory.push({ role: 'user', text: _lastAiMsg || 'Update my campaign' });
+    _sheetHistory.push({ role: 'ai', text: 'Done! Here\'s what I updated:', wc: [
+      { c:'#A78BFA', l:'Schedule', v:'Apr 29 – May 6' },
+      { c:'#F4A4C0', l:'Offer', v:'15% OFF added' },
+    ]});
     const t = document.getElementById('ai-upd-toast');
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2200);
