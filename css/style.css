@@ -2888,7 +2888,7 @@ svg {
     background: #fff;
     color: #2f2c35;
     border: 1px solid #b9abf7;
-    border-radius: 12px 12px 4px 12px;
+    border-radius: 12px 12px 12px 4px;
     padding: 8px 12px;
     font-size: 14px;
     line-height: 1.45
@@ -2896,7 +2896,7 @@ svg {
 .ai-sheet-wc {
     background: linear-gradient(to bottom, #fefefe, #f0eaff);
     border: 1px solid #b9abf7;
-    border-radius: 12px 12px 4px 12px;
+    border-radius: 12px 12px 12px 4px;
     box-shadow: 0 2px 16px rgba(0,0,0,0.1);
     overflow: hidden
 }
