@@ -231,17 +231,31 @@ function closeAiSheet() {
 function renderSheetChat() {
   const chat = document.getElementById('ai-sheet-chat');
   if (!_sheetHistory.length) {
-    chat.innerHTML = '<div style="font-size:12px;color:#B0A8D0;text-align:center;margin-top:20px">AI updated your campaign based on your request.</div>';
+    chat.innerHTML = '<div style="font-size:12px;color:rgba(61,61,61,0.4);text-align:center;margin-top:20px">AI updated your campaign based on your request.</div>';
     return;
   }
+  const wandSvg = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L5.5 6.5M7.5 1l.4 1.6L9.5 3l-1.6.4L7.5 5l-.4-1.6L5.5 3l1.6-.4L7.5 1z" stroke="#5f2eea" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3" cy="8.5" r=".6" fill="#5f2eea"/></svg>';
+  const ava = `<img class="ai-sheet-ava-sm" src="assets/icons/icon-cat-bot.png" width="32" height="32" alt=""/>`;
   chat.innerHTML = _sheetHistory.map(m => {
     if (m.role === 'user') return `<div class="ai-sheet-bubble-usr">${m.text}</div>`;
-    return `<div style="display:flex;flex-direction:column;gap:4px">
-      <div class="ai-sheet-bubble-ai">${m.text}</div>
-      ${m.wc ? `<div class="ai-sheet-wc">
-        <div class="ai-sheet-wc-hd">What changed</div>
-        ${m.wc.map(r=>`<div class="ai-sheet-wc-row"><div class="ai-sheet-wc-dot" style="background:${r.c}"></div><span class="ai-sheet-wc-lbl">${r.l}</span><span>${r.v}</span></div>`).join('')}
-      </div>` : ''}
+    return `<div class="ai-sheet-row-ai">
+      ${ava}
+      <div class="ai-sheet-row-ai-content">
+        <div class="ai-sheet-bubble-ai">${m.text}</div>
+        ${m.wc ? `<div class="ai-sheet-wc">
+          <div class="ai-sheet-wc-hd">
+            <div class="ai-sheet-wc-icon">${wandSvg}</div>
+            <span>What changed</span>
+          </div>
+          <div class="ai-sheet-wc-divider"></div>
+          <div class="ai-sheet-wc-list">
+            ${m.wc.map(r=>`<div class="ai-sheet-wc-row">
+              <div class="ai-sheet-wc-lft"><div class="ai-sheet-wc-dot" style="background:${r.c}"></div><span class="ai-sheet-wc-lbl">${r.l}</span></div>
+              <span class="ai-sheet-wc-val">${r.v}</span>
+            </div>`).join('')}
+          </div>
+        </div>` : ''}
+      </div>
     </div>`;
   }).join('');
 }
