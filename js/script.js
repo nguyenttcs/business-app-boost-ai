@@ -328,3 +328,13 @@ function sendAiEdit() {
     inp.disabled = false;
   }, 1100);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const trigger = document.getElementById('ai-upd-notif');
+  if (!trigger) return;
+  let _ty = 0;
+  trigger.addEventListener('touchstart', e => { _ty = e.touches[0].clientY; }, { passive: true });
+  trigger.addEventListener('touchend', e => {
+    if (_ty - e.changedTouches[0].clientY > 30) openAiSheet();
+  }, { passive: true });
+});
